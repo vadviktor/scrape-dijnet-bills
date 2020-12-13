@@ -4,12 +4,15 @@ import re
 
 from scrape.download import file as download_file
 
-from selenium.webdriver import Firefox, ActionChains
+from selenium.webdriver import Chrome, ChromeOptions, ActionChains
 from selenium.webdriver.common.by import By
-from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support.select import Select
 from selenium.webdriver.support.wait import WebDriverWait
+
+USERNAME = ""
+PASSWORD = ""
+FROM = "2020.12.01"
 
 logging.basicConfig(
     format="%(levelname)s:%(filename)s:%(lineno)d:%(message)s", level=logging.DEBUG
@@ -21,9 +24,9 @@ class Spider:
         self.url_login = "https://www.dijnet.hu/?bejelentkezes=open"
         self.url_control = "https://www.dijnet.hu/ekonto/control"
         self.url_szamla_search = f"{self.url_control}/szamla_search"
-        self.username = ""
-        self.password = ""
-        self.first_date = "2016.01.01"
+        self.username = USERNAME
+        self.password = PASSWORD
+        self.first_date = FROM
         self.providers = [
             "Díjbeszedő Zrt.",
             "FCSM Zrt.",
@@ -32,10 +35,10 @@ class Spider:
             "Társ.díj felosz",
         ]
 
-        firefox_options = Options()
-        # firefox_options.add_argument("--headless")
-        firefox_options.page_load_strategy = "eager"
-        self.d = Firefox(options=firefox_options)
+        options = ChromeOptions()
+        options.add_argument("--headless")
+        options.page_load_strategy = "eager"
+        self.d = Chrome(options=options)
         self.wait = WebDriverWait(self.d, timeout=10, poll_frequency=2)
 
     def crawl(self):
