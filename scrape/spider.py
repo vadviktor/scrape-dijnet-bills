@@ -12,7 +12,8 @@ from selenium.webdriver.support.wait import WebDriverWait
 
 USERNAME = ""
 PASSWORD = ""
-FROM = "2020.12.01"
+# [2021.03.28] Scrape next from this date:
+FROM = "2021.03.28"
 
 logging.basicConfig(
     format="%(levelname)s:%(filename)s:%(lineno)d:%(message)s", level=logging.DEBUG
@@ -30,7 +31,7 @@ class Spider:
         self.providers = [
             "Díjbeszedő Zrt.",
             "FCSM Zrt.",
-            "Főtáv Zrt.",
+            "FŐTÁV Nonprofit Zrt.",
             "FV Zrt.",
             "Társ.díj felosz",
         ]
