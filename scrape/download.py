@@ -35,12 +35,13 @@ def file(cookies: List[Dict[str, Any]], url: str, dir: str) -> None:
 
     r = rget(url, cookies=cookies_jar)
     if not r.ok:
-        return "", 0
+        return
 
     basedir = os.path.join(os.getcwd(), dir)
     os.makedirs(basedir, exist_ok=True)
     filename = os.path.join(
-        basedir, r.headers["Content-Disposition"].replace("attachment;filename=", ""),
+        basedir,
+        r.headers["Content-Disposition"].replace("attachment;filename=", ""),
     )
 
     with open(filename, "wb") as fd:

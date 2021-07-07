@@ -1,6 +1,7 @@
 import logging
 from datetime import datetime
 import re
+from os import environ
 
 from scrape.download import file as download_file
 
@@ -10,10 +11,9 @@ from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support.select import Select
 from selenium.webdriver.support.wait import WebDriverWait
 
-USERNAME = ""
-PASSWORD = ""
-# [2021.03.28] Scrape next from this date:
-FROM = "2021.03.28"
+USERNAME = environ.get("USERNAME")
+PASSWORD = environ.get("PASSWORD")
+FROM = environ.get("FROM")
 
 logging.basicConfig(
     format="%(levelname)s:%(filename)s:%(lineno)d:%(message)s", level=logging.DEBUG
